@@ -65,7 +65,7 @@ from .errors import ModelNotSupported, StrategyConfigurationError
 from .power_profile.library import ModelInfo, ProfileLibrary
 from .power_profile.model_discovery import get_power_profile
 from .power_profile.power_profile import PowerProfile
-from .sensors.daily_energy import DEFAULT_DAILY_UPDATE_FREQUENCY
+from custom_components.powercalc.sensors.fixed_energy.daily_energy import DEFAULT_DAILY_UPDATE_FREQUENCY
 from .strategy.factory import PowerCalculatorStrategyFactory
 from .strategy.strategy_interface import PowerCalculationStrategyInterface
 from .strategy.wled import CONFIG_SCHEMA as SCHEMA_POWER_WLED

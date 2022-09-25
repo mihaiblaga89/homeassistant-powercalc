@@ -129,7 +129,7 @@ from .errors import (
 )
 from .power_profile.model_discovery import is_autoconfigurable
 from .sensors.abstract import BaseEntity
-from .sensors.daily_energy import (
+from custom_components.powercalc.sensors.fixed_energy.daily_energy import (
     DAILY_FIXED_ENERGY_SCHEMA,
     create_daily_fixed_energy_power_sensor,
     create_daily_fixed_energy_sensor,
