@@ -1,20 +1,13 @@
 from __future__ import annotations
 
-import decimal
 import logging
 from datetime import datetime, timedelta
 from decimal import Decimal
-from typing import Any, Callable
 
 import homeassistant.helpers.config_validation as cv
 import homeassistant.util.dt as dt_util
 import voluptuous as vol
 from homeassistant.components.sensor import DOMAIN as SENSOR_DOMAIN
-from homeassistant.components.sensor import (
-    SensorDeviceClass,
-    SensorEntity,
-    SensorStateClass,
-)
 from homeassistant.const import (
     CONF_NAME,
     CONF_UNIQUE_ID,
@@ -27,16 +20,13 @@ from homeassistant.const import (
 from homeassistant.core import HomeAssistant, callback
 from homeassistant.helpers.entity import async_generate_entity_id
 from homeassistant.helpers.event import async_track_time_interval
-from homeassistant.helpers.restore_state import RestoreEntity
 from homeassistant.helpers.template import Template
 from homeassistant.helpers.typing import ConfigType
 
 from custom_components.powercalc.common import SourceEntity
 from custom_components.powercalc.const import (
     CONF_DAILY_FIXED_ENERGY,
-    CONF_ENERGY_SENSOR_CATEGORY,
     CONF_ENERGY_SENSOR_PRECISION,
-    CONF_ENERGY_SENSOR_UNIT_PREFIX,
     CONF_FIXED,
     CONF_ON_TIME,
     CONF_POWER,
@@ -48,7 +38,6 @@ from custom_components.powercalc.sensors.abstract import generate_energy_sensor_
 from custom_components.powercalc.sensors.power import VirtualPowerSensor, create_virtual_power_sensor
 from .abstract import FixedEnergySensor
 
-ENERGY_ICON = "mdi:lightning-bolt"
 ENTITY_ID_FORMAT = SENSOR_DOMAIN + ".{}"
 
 DEFAULT_DAILY_UPDATE_FREQUENCY = 1800

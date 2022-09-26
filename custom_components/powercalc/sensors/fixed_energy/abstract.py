@@ -13,7 +13,9 @@ from homeassistant.components.sensor import (
     SensorEntity,
     SensorStateClass,
 )
+from homeassistant.components.sensor import DOMAIN as SENSOR_DOMAIN
 from homeassistant.const import (
+    CONF_NAME,
     CONF_UNIQUE_ID,
     CONF_UNIT_OF_MEASUREMENT,
     ENERGY_KILO_WATT_HOUR,
@@ -21,19 +23,27 @@ from homeassistant.const import (
     ENERGY_WATT_HOUR,
 )
 from homeassistant.core import HomeAssistant, callback
+from homeassistant.helpers.entity import async_generate_entity_id
 from homeassistant.helpers.restore_state import RestoreEntity
 from homeassistant.helpers.template import Template
 from homeassistant.helpers.typing import ConfigType
+from custom_components.powercalc.common import SourceEntity
 from custom_components.powercalc.const import (
+    CONF_DAILY_FIXED_ENERGY,
     CONF_ENERGY_SENSOR_CATEGORY,
+    CONF_ENERGY_SENSOR_PRECISION,
     CONF_ENERGY_SENSOR_UNIT_PREFIX,
     UnitPrefix,
 )
 from custom_components.powercalc.sensors.energy import EnergySensor
+from custom_components.powercalc.migrate import async_migrate_entity_id
+from custom_components.powercalc.sensors.abstract import generate_energy_sensor_entity_id, generate_energy_sensor_name
+from .daily_energy import DailyEnergySensor
 
 _LOGGER = logging.getLogger(__name__)
 
 ENERGY_ICON = "mdi:lightning-bolt"
+ENTITY_ID_FORMAT = SENSOR_DOMAIN + ".{}"
 
 
 class FixedEnergyMode(StrEnum):
